@@ -23,6 +23,7 @@
   "dependencies": {
     "@ironbay/kora": "^2.4.4",
     "@ironbay/legos": "github:ironbay/legos",
+    "@types/node": "^8.0.53",
     "@types/react-router-dom": "^4.2.2",
     "@types/webpack-env": "^1.13.2",
     "autoprefixer": "7.1.6",
