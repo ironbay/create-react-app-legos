@@ -12,8 +12,8 @@ const render = Component => {
 	, element)
 }
 render(Routes)
-if (module.hot) {
-		module.hot.accept('./routes', () => {
+if ((module as any).hot) {
+		(module as any).hot.accept('./routes', () => {
 			const NextApp = require('./routes').default
 			ReactDOM.render(
 				<AppContainer>

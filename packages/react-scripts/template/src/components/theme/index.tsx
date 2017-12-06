@@ -2,7 +2,6 @@ import '@ironbay/legos/dist/legos.css'
 import * as React from 'react'
 import * as cs from 'classnames'
 import legos from '@ironbay/legos/dist/classes'
-console.log(legos)
 
 export function component<T>(element: any, base_class: string, forced_props = {}): (props: T) => React.SFCElement<T> {
 	return function(props: T & {[key: string]: boolean}): any {
