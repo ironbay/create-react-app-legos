@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { component } from '../theme'
 
-export const Container = component<any>('div', 'container')
+export const Container = component<React.HTMLAttributes<HTMLDivElement>>('div', 'container')
 
 export function Wrap(props) {
 	return (
-		<Container flex justify-center>
+		<Container justify-center flex>
 			<Container pad-h4 style={{
 				width: '68rem',
 				maxWidth: '100%',
@@ -44,14 +44,16 @@ export class Grid extends React.Component<{[key: string]: any} & GridProps, any>
 				.chunk([].concat(children), columns)
 				.map((items, index: number) => {
 					return (
-						<Container s-flex key={index} >
+						<Container key={index}>
 						{
 							items.map((item, inner: number) => (
 								<Container
 									key={inner}
-									flex-column
-									style={flush ? {} : { padding: '1rem 0 0 1rem'}}
-									flex>
+									style={{
+										display: 'inline-block',
+										padding: flush ? 'initial' : '1rem 0 0 1rem',
+										width: 100 / columns + '%',
+									}}>
 									{item}
 								</Container>
 							))

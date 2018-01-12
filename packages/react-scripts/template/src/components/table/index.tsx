@@ -1,10 +1,9 @@
 import './styles.css'
 import * as React from 'react'
 import { Container } from '../container'
+import { component } from '../theme'
 
-import wrap from '../wrap'
-
-export const Root = wrap(function({ children, ...rest}) {
+export const Root = component(function({ children, ...rest}) {
 	return (
 		<table {...rest}>
 			<tbody>
@@ -12,28 +11,31 @@ export const Root = wrap(function({ children, ...rest}) {
 			</tbody>
 		</table>
 	)
-}, 'table', {}, {})
+}, 'table', {})
 
-export const Row = wrap('tr', 'table-row', {}, {
-	cursor: true,
-})
+export const Row = component('tr', 'table-row', {})
 
-function HeaderInner({ children, ...rest}) {
+export const Header = component(function({children, ...rest}) {
 	return (
-		<th {...rest}>
-			<Container uppercase size-3 weight-5 fg-gray >{children}</Container>
+		<th>
+			<Container {...rest}>{children}</Container>
 		</th>
 	)
-}
+}, 'table-header', {
+	'uppercase': true,
+	'size-3': true,
+	'weight-5': true,
+	'fg-gray': true,
+	'text-left': true,
+	'pad-b2': true,
+})
 
-export const Header = wrap(HeaderInner, 'table-header', {}, {})
+export const Cell = component('td', 'table-cell', {
+	'pad-v3': true,
+	'text-left': true,
+	'style': {
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
 
-export const Cell = wrap('td', 'table-cell', {}, {})
-
-export const TextCell = wrap(function({ children, ...rest}) {
-	return (
-		<Cell {...rest}>
-			<Container>{children}</Container>
-		</Cell>
-	)
-}, 'table-text-cell', {}, {})
+	}
+})

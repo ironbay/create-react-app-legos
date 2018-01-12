@@ -15,9 +15,16 @@ export default class Editor<T> {
 	}
 
 	public handle(path: string[], cb = (value: any) => {}) {
-		return (e: React.ChangeEvent<HTMLInputElement>) => {
+		return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
 			const { value } = e.target
 			this.merge(path, value, cb)
+		}
+	}
+
+	public handle_json(path: string[], cb = (value: any) => {}) {
+		return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+			const { value } = e.target
+			this.merge(path, JSON.parse(value), cb)
 		}
 	}
 
@@ -38,8 +45,8 @@ export default class Editor<T> {
 	}
 
 	public delete(path: string[], cb = () => {}) {
-		const full = [...path, ...this._path]
-		Dynamic.put(this.changes.merge, path, 1)
+		const full = [...this._path, ...path]
+		Dynamic.put(this.changes.delete, path, 1)
 		this._component.setState(state => {
 			return Dynamic.delete(state, full)
 		}, () => cb())

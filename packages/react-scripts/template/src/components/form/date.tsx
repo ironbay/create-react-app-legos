@@ -31,12 +31,14 @@ export default class Date extends React.Component<Props, any> {
 		return (
 			<Container flex-column >
 				<Container flex>
-					<Form.Input
-						fg-red={this.state.value}
-						value={this.state.value === false ? ts.format(DISPLAY_FORMAT) : this.state.value}
-						onChange={e => this.handle_change(e.target.value)}
-						disabled={disabled}
-						{...rest} />
+					<Container flex-grow>
+						<Form.Input
+							fg-red={this.state.value}
+							value={this.state.value === false ? ts.format(DISPLAY_FORMAT) : this.state.value}
+							onChange={e => this.handle_change(e.target.value)}
+							disabled={disabled}
+							{...rest} />
+					</Container>
 					{!disabled && !focus && <Icon src="calendar" onClick={() => this.handle_focus(!focus)} />}
 					{!disabled && focus && <Icon src="chevron-down" onClick={() => this.handle_focus(!focus)} />}
 				</Container>
@@ -54,19 +56,17 @@ export default class Date extends React.Component<Props, any> {
 		return (
 			<Container
 				style={{
-					zIndex: '1000',
 					position: 'absolute',
 					top: '100%',
-					right: '-1px',
-					left: '-1px',
+					right: '0px',
+					left: '0px',
 				}}
 				flex
 				flex-column
-				border-1
-				bg-lightgray>
+				bg-light-gray>
 				<Container flex justify-center align-center>
 					<Arrow flip={false} onClick={() => this.handle_date(start.clone().add(-1, 'month'))} />
-					<Container justify-center flex pad-v6 weight-5>{start.format('MMMM YYYY')}</Container>
+					<Container justify-center flex-grow text-center pad-v6 weight-5>{start.format('MMMM YYYY')}</Container>
 					<Arrow flip={true} onClick={() => this.handle_date(start.clone().add(1, 'month'))} />
 				</Container>
 				<Grid columns={7} flush pad-2>
@@ -77,12 +77,9 @@ export default class Date extends React.Component<Props, any> {
 							return (
 								<Container
 									key={n}
-									flex
-									align-center
-									justify-center
-									flex-column
+									flex-grow
 									pad-v2
-									pointer={!disabled}
+									cursor-pointer={!disabled}
 									onClick={() => {
 										if (disabled)
 											return
@@ -91,6 +88,7 @@ export default class Date extends React.Component<Props, any> {
 									}}
 								>
 									<Container
+										text-center
 										mgn-b1
 										hide={disabled}
 										weight-6={active}
@@ -98,6 +96,7 @@ export default class Date extends React.Component<Props, any> {
 										{item.format('DD')}
 									</Container>
 									<Container
+										text-center
 										hide={disabled}
 										size-3
 										weight-3
@@ -159,5 +158,5 @@ export default class Date extends React.Component<Props, any> {
 }
 
 function Arrow({ flip, ...rest }) {
-	return <Container pointer {...rest} align-center pad-h5 >{flip ? '→' : '←'}</Container>
+	return <Container cursor-pointer {...rest} align-center pad-h5 >{flip ? '→' : '←'}</Container>
 }

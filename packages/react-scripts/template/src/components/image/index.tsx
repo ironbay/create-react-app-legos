@@ -8,11 +8,11 @@ export const Image = component<React.ImgHTMLAttributes<HTMLImageElement>>('img',
 export function Icon(props) {
 	const { src, ...rest } = props
 	return (
-		<Container pointer {...rest}>
+		<Container cursor-pointer {...rest}>
 			<Image
 				style={{verticalAlign: 'top'}}
 				width={18}
-				src={`https://feathericons.com/node_modules/feather-icons/dist/icons/${src}.svg`} />
+				src={`https://storage.googleapis.com/ridehealth-public/feather/${src}.svg`} />
 		</Container>
 	)
 }

@@ -7,7 +7,7 @@
 	border: 0;
 	outline: 0;
 	width: 100%;
-	background: transparent;
+	line-height: 1.4rem;
 }
 
 .input:disabled {

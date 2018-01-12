@@ -37,14 +37,14 @@ export default class Autocomplete extends React.Component<Props, State> {
 				<Container align-center flex>
 					{
 						display && 
-							<Container align-center mgn-r4 flex-3 >
-								<Container size-4 className="input">{display}</Container>
+							<Container align-center mgn-r4 flex>
+								<Container size-4 weight-5 className="input" mgn-r2>{display}</Container>
 								{!disabled && <Icon src="x" onClick={() => this.handle_change(undefined)} />}
 							</Container>
 					}
 					{
 						!disabled &&
-							<Container flex-7>
+							<Container flex-grow>
 								<Input
 									value={this.state.filter}
 									onChange={this.handle_search}
@@ -57,16 +57,16 @@ export default class Autocomplete extends React.Component<Props, State> {
 					style={{
 						position: 'absolute',
 						top: '100%',
-						right: '-1px',
-						left: '-1px',
+						right: '0px',
+						left: '0px',
 					}}
-					bg-white
+					bg-light-gray
 					hide={!focus || !filter}
-					border-1>
+					>
 					{
 						matches.map(([k, v]) => {
 							return (
-								<Container pointer pad-h5 pad-v5 key={k} onMouseDown={() => this.handle_change(k)} >
+								<Container cursor-pointer pad-h5 pad-v5 key={k} onMouseDown={() => this.handle_change(k)} >
 									<Container size-3-5>{v}</Container>
 								</Container>
 							)
@@ -74,7 +74,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 					}
 					{
 						matches.length === 0 && 
-								<Container pointer pad-h5 pad-v5 >
+								<Container cursor-pointer pad-h5 pad-v5 >
 									<Container size-3-5>No matches found</Container>
 								</Container>
 					}

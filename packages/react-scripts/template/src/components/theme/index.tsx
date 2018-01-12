@@ -3,10 +3,18 @@ import * as React from 'react'
 import * as cs from 'classnames'
 import legos from '@ironbay/legos/dist/classes'
 
-export function component<T>(element: any, base_class: string, forced_props = {}): (props: T) => React.SFCElement<T> {
-	return function(props: T & {[key: string]: boolean}): any {
+type Extra = {
+	[key: string]: any
+}
+
+export function component<T>(element: any, base_class: string, forced_props = {}): (props: T & Extra) => React.SFCElement<T & Extra> {
+	return function(props: T & Extra) {
 		const classes = {}
-		const { children, className, ...rest} = props as any
+		let { children, className, ...rest} = props as any
+		rest = {
+			...forced_props,
+			...rest,
+		}
 		for (let key of Object.keys(rest)) {
 			if (legos[key]) {
 				classes[key] = rest[key]
@@ -14,10 +22,9 @@ export function component<T>(element: any, base_class: string, forced_props = {}
 			}
 		}
 		const combined = cs(base_class, className, classes)
-		return React.createElement<T>(element, {
+		return React.createElement<T & Extra>(element, {
 			className: combined,
 			...rest,
-			...forced_props
 		}, children)
 	}
 }

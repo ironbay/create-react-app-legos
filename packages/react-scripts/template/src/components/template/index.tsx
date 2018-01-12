@@ -1,15 +1,15 @@
 import './styles.css'
 import * as React from 'react'
 
-interface IProps {
+interface Props {
 
 }
 
-interface IState {
+interface State {
 
 }
 
-export default class Template extends React.Component<IProps, IState> {
+export default class Template extends React.Component<Props, State> {
 	constructor(props, context) {
 		super(props, context)
 	}

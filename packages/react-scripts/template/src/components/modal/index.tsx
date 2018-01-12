@@ -1,93 +1,74 @@
 import './styles.css'
 import * as React from 'react'
-import wrap from '../wrap'
-import * as cs from 'classnames'
+import { component } from '../theme'
+import { Container } from '../container'
+import { Icon } from '../image'
 
-import Container from '../container'
-import Text from '../text'
-import Icon from '../icon'
-
-interface IProps {
-	active?: boolean,
+interface Props {
+	active: boolean,
 	slider?: boolean,
 	onHide?: () => void,
-	children: JSX.Element[],
+	children?: any
 }
 
-export function Modal(props: IProps) {
-	const classes = cs('modal', {
-		active: props.active
-	})
-	const wrap_classes = cs('modal-wrap', {
-		slider: props.slider
-	})
+interface State {
+
+}
+
+export function Root(props: Props) {
 	return (
-		<Container onClick={props.onHide} className={classes} justify-center align-center>
-			<Container onClick={e => e.stopPropagation()} vertical bg-white className={wrap_classes}>
+		<Container
+			onClick={props.onHide}
+			style={{
+				background: 'rgba(0, 0, 0, .25)',
+				transition: '300ms all',
+				opacity: props.active ? 100 : 0,
+				zIndex: 10000,
+				position: 'fixed',
+				left: 0,
+				right: 0,
+				top: 0,
+				bottom: 0,
+				pointerEvents: props.active ? 'all' : 'none',
+			}}
+			pad-4={!props.slider}
+			flex
+			justify-center={!props.slider}
+			align-center={!props.slider}
+			justify-end={props.slider}
+			cursor-pointer>
+			<Container
+				flex={props.slider}
+				flex-column={props.slider}
+				onClick={e => e.stopPropagation()}
+				style={{
+					flexBasis: '30rem',
+					transition: '300ms all',
+					cursor: 'initial',
+					transform:
+						!props.active && !props.slider ? 'translate3d(0, 50px, 0)' :
+						!props.active && props.slider ? 'translate3d(25%, 0, 0)' :
+						'translate3d(0, 0, 0)'
+				}}
+				bg-white>
 				{props.children}
-				<Container hide-desktop mgn-l4 onClick={props.onHide} style={{position: 'absolute', top: 16}}>
-					<Icon src='x'/>
-				</Container>
 			</Container>
 		</Container>
 	)
 }
 
-export const ModalTitle = wrap(Text, 'modal-title', {
+export const Title = component<React.HTMLAttributes<HTMLDivElement>>(Container, '', {
+	'bg-light-gray': true,
 	'pad-v5': true,
-	'bg-lightgray': true,
 	'weight-5': true,
 	'fg-gray': true,
-	unselectable: true,
-	style: {
-		textAlign: 'center'
-	}
-}, {})
+	'text-center': true,
+})
 
-export class ModalButton extends React.Component<any, any> {
-	constructor() {
-		super()
-		this.state = {
-			active: false,
-		}
-	}
-	render() {
-		const { active } = this.state
-		const props = {
-			...this.props,
-			onClick: this.handle_click,
-			children: active ? 'Working...' : this.props.children
-		}
-		return this.wrap(props)
-	}
-
-	private handle_click = async e => {
-		if (this.state.active)
-			return
-		this.setState({
-			active: true
-		})
-		try {
-			await this.props.onClick(e)
-		} catch (ex) {
-			alert(ex)
-		}
-		this.setState({
-			active: false
-		})
-
-	}
-
-	private wrap = wrap(Text, 'modal-button', {
-		'pad-v5': true,
-		'justify-center': true,
-		'weight-5': true,
-		'size-3': true,
-		'uppercase': true,
-		'flex-basis': true,
-		'cursor': true,
-		'grow': 1,
-	}, {})
-
-
-}
+export const Footer = component<React.HTMLAttributes<HTMLDivElement>>(Title, '', {
+	'bg-blue': true,
+	'fg-white': true,
+	'uppercase': true,
+	'size-3': true,
+	'cursor-pointer': true,
+})
