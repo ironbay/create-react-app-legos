@@ -33,7 +33,7 @@ export default class Editor<T> {
 			merge: {},
 			delete: {},
 		}
-		this._component.setState(state => Dynamic.put(state, this._path, item))
+		this._component.setState(state => Dynamic.put(state, this._path, JSON.parse(JSON.stringify(item))))
 	}
 
 	public merge(path: string[], value: any, cb = (v: any) => {}) {

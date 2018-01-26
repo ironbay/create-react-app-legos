@@ -23,7 +23,7 @@ export function Root(props: Props) {
 				background: 'rgba(0, 0, 0, .25)',
 				transition: '300ms all',
 				opacity: props.active ? 100 : 0,
-				zIndex: 10000,
+				zIndex: props.active ? 10000 : -10000,
 				position: 'fixed',
 				left: 0,
 				right: 0,
@@ -45,6 +45,8 @@ export function Root(props: Props) {
 					flexBasis: '30rem',
 					transition: '300ms all',
 					cursor: 'initial',
+					overflowY: props.slider ? 'initial' : 'auto',
+					maxHeight: props.slider ? '100%' : '80%',
 					transform:
 						!props.active && !props.slider ? 'translate3d(0, 50px, 0)' :
 						!props.active && props.slider ? 'translate3d(25%, 0, 0)' :
