@@ -2,6 +2,9 @@
 
 Create React apps (with Typescript) with no build configuration.
 
+ * [Getting Started](#tldr) – How to create a new app.
+ * [User Guide](https://github.com/wmonk/create-react-app-typescript/blob/master/packages/react-scripts/template/README.md) – How to develop apps bootstrapped with react scripts ts.
+
 _Do you know react and want to try out typescript? Or do you know typescript and want to try out react?_ Get all the benefits from `create-react-app` but you use typescript! 🚀
 
 ## tl;dr
@@ -36,8 +39,25 @@ To fix this, create a new file *in the root of the project* called `tsconfig.tes
 
 ## Changelog
 
-### 2.9.0 (unpublished)
-* Merge latest facebook/create-react-app - @bootstraponline
+### 2.13.0
+* Remove tslint-loader from prod builds - @DorianGrey
+* Include typescript as devDependency in boilerplate - @ianschmitz
+* Document custom module formats - @joshtynjala
+* Fix tsconfig.json - @diabelb
+
+### 2.12.0
+* Update typescript to 2.6.2
+
+### 2.11.0
+* Upgrade to [`react-scripts@1.0.17`](https://github.com/facebookincubator/create-react-app/releases/tag/v1.0.17)
+
+### 2.10.0
+* README updates - StefanSchoof
+* README updates - DorianGrey
+* Add support for fork-ts-checker-webpack-plugin - johnnyreilly
+
+### 2.9.0 - UNPUBLISHED
+This included changes that were not published by the facebook upstream, so was unpublished.
 
 ### 2.8.0
 * Update typescript to 2.5.3 - @nicolaserny

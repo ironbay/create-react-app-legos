@@ -625,11 +625,26 @@ Now running `npm start` and `npm run build` also builds Sass files.
 
 With Webpack, using static assets like images and fonts works similarly to CSS.
 
-You can **`import` a file right in a JavaScript module**. This tells Webpack to include that file in the bundle. Unlike CSS imports, importing a file gives you a string value. This value is the final path you can reference in your code, e.g. as the `src` attribute of an image or the `href` of a link to a PDF.
+You can **`import` a file right in a TypeScript module**. This tells Webpack to include that file in the bundle. Unlike CSS imports, importing a file gives you a string value. This value is the final path you can reference in your code, e.g. as the `src` attribute of an image or the `href` of a link to a PDF.
 
 To reduce the number of requests to the server, importing images that are less than 10,000 bytes returns a [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) instead of a path. This applies to the following file extensions: bmp, gif, jpg, jpeg, and png. SVG files are excluded due to [#1153](https://github.com/facebookincubator/create-react-app/issues/1153).
 
-Here is an example:
+Before getting started, you must define each type of asset as a valid module format. Otherwise, the TypeScript compiler will generate an error like this:
+
+>Cannot find module './logo.png'.
+
+To import asset files in TypeScript, create a new type definition file in your project, and name it something like `assets.d.ts`. Then, add a line for each type of asset that you need to import:
+
+```ts
+declare module "*.gif";
+declare module "*.jpg";
+declare module "*.jpeg";
+declare module "*.png";
+```
+
+In this case, we've added several image file extensions as valid module formats.
+
+Now that the compiler is configured, here is an example of importing an image file:
 
 ```js
 import React from 'react';
@@ -1264,18 +1279,14 @@ When you encounter bugs caused by changing components, you will gain a deeper in
 If you’d like to test components in isolation from the child components they render, we recommend using [`shallow()` rendering API](http://airbnb.io/enzyme/docs/api/shallow.html) from [Enzyme](http://airbnb.io/enzyme/). To install it, run:
 
 ```sh
-npm install --save enzyme @types/enzyme enzyme-adapter-react-16 @types/enzyme-adapter-react-16 react-test-renderer @types/react-test-renderer
+npm install --save-dev enzyme @types/enzyme enzyme-adapter-react-16 @types/enzyme-adapter-react-16 react-test-renderer @types/react-test-renderer
 ```
 
 Alternatively you may use `yarn`:
 
 ```sh
-yarn add enzyme @types/enzyme enzyme-adapter-react-16 @types/enzyme-adapter-react-16 react-test-renderer @types/react-test-renderer
+yarn add --dev enzyme @types/enzyme enzyme-adapter-react-16 @types/enzyme-adapter-react-16 react-test-renderer @types/react-test-renderer
 ```
-
-As of Enzyme 3, you will need to install Enzyme along with an Adapter corresponding to the version of React you are using. (The examples above use the adapter for React 16.)
-
-The adapter will also need to be configured in your [global setup file](#initializing-test-environment):
 
 #### `src/setupTests.ts`
 ```ts
@@ -1285,7 +1296,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 ```
 
-Now you can write a smoke test with it:
+As of Enzyme 3, you will need to install Enzyme along with an Adapter corresponding to the version of React you are using. (The examples above use the adapter for React 16.)
 
 ```ts
 import * as React from 'react';
