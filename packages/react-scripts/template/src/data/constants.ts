@@ -1,0 +1,1 @@
+export const URL = process.env.NODE_ENV === 'development' ? 'ws://localhost:12000/socket' : `wss://${location.host}/socket`

@@ -1,8 +1,8 @@
 import './styles.css'
 import * as React from 'react'
-import { component } from '../theme'
 import { Container } from '../container'
 import { Icon } from '../image'
+import Lego from '../lego'
 
 interface Props {
 	active: boolean,
@@ -59,18 +59,20 @@ export function Root(props: Props) {
 	)
 }
 
-export const Title = component<React.HTMLAttributes<HTMLDivElement>>(Container, '', {
+export const Title = Lego<React.HTMLAttributes<HTMLDivElement>>(Container, props => ({
 	'bg-light-gray': true,
 	'pad-v5': true,
 	'weight-5': true,
 	'fg-gray': true,
 	'text-center': true,
-})
+	...props,
+}))
 
-export const Footer = component<React.HTMLAttributes<HTMLDivElement>>(Title, '', {
+export const Footer = Lego<React.HTMLAttributes<HTMLDivElement>>(Title, props => ({
 	'bg-blue': true,
 	'fg-white': true,
 	'uppercase': true,
 	'size-3': true,
 	'cursor-pointer': true,
-})
+	...props,
+}))

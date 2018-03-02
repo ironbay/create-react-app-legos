@@ -1,7 +1,18 @@
 import * as React from 'react'
-import { component } from '../theme'
+import Lego from '../lego'
 
-export const Container = component<React.HTMLAttributes<HTMLDivElement>>('div', 'container')
+export const Container = Lego<React.HTMLAttributes<HTMLDivElement>>('div')
+
+export const Card = Lego<React.HTMLAttributes<HTMLDivElement>>(Container, props => ({
+	'bg-white': true,
+	'radius-4': true,
+	'pad-6': true,
+	...props,
+	'style': {
+		boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.08)',
+		...props.style,
+	},
+}))
 
 export function Wrap(props) {
 	return (

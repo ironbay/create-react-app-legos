@@ -1,9 +1,15 @@
 import './styles.css'
 import * as React from 'react'
 import { Container } from '../container'
-import { component } from '../theme'
+import Lego from '../lego'
 
-export const Image = component<React.ImgHTMLAttributes<HTMLImageElement>>('img', 'image', {})
+export const Image = Lego<React.ImgHTMLAttributes<HTMLImageElement>>('img', props => ({
+	...props,
+	style: {
+		height: 'auto',
+		...props.style,
+	}
+}))
 
 export function Icon(props) {
 	const { src, ...rest } = props
