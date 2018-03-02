@@ -25,12 +25,15 @@ module.exports = (resolve, rootDir, isEjecting) => {
     setupFiles: [resolve('config/polyfills.js')],
     setupTestFrameworkScriptFile: setupTestsFile,
     testMatch: [
-      '<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs,ts,tsx}',
-      '<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs,ts,tsx}',
+      '<rootDir>/src/**/__tests__/**/*.(j|t)s?(x)',
+      '<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)',
     ],
     testEnvironment: 'node',
     testURL: 'http://localhost',
     transform: {
+      '^.+\\.(js|jsx|mjs)$': isEjecting
+        ? '<rootDir>/node_modules/babel-jest'
+        : resolve('config/jest/babelTransform.js'),
       '^.+\\.tsx?$': resolve('config/jest/typescriptTransform.js'),
       '^.+\\.css$': resolve('config/jest/cssTransform.js'),
       '^(?!.*\\.(js|jsx|mjs|css|json)$)': resolve(
