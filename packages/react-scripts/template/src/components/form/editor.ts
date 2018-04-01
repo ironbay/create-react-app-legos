@@ -1,4 +1,4 @@
-import { Dynamic } from '@ironbay/kora'
+import { Dynamic } from '@ironbay/dynamic'
 
 export default class Editor<T> {
 	public changes: Mutation

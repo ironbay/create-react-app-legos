@@ -21,6 +21,7 @@
     "react-scripts-ts": "./bin/react-scripts-ts.js"
   },
   "dependencies": {
+    "@ironbay/dynamic": "^1.0.4",
     "@ironbay/kora": "^2.4.8",
     "@ironbay/legos": "^1.0.8",
     "@types/googlemaps": "^3.30.5",
